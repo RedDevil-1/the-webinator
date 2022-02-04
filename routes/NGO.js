@@ -3,7 +3,7 @@ const express = require("express"),
   router = express.Router(),
   passport = require("passport"),
   LocalStrategy = require("passport-local");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 // middle ware
 
