@@ -31,7 +31,7 @@ router.get("/signup", (req, res) => {
   res.render("../views/adminsignup.html");
 });
 
-router.post("/signup", checkAuthentication, function (req, res) {
+router.post("/signup", function (req, res) {
   Admin.register(
     new Admin({
       name: req.body.name,

@@ -10,18 +10,36 @@ const passport = require("passport"),
 var session = require("express-session");
 var flash = require("connect-flash");
 
-//connecting  MONGODB
-mongoose
-  .connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("DB Connection successful");
-  })
-  .catch(() => {
-    console.log("Unable to connect to DB");
-  });
+// connecting  MONGODB
+// mongoose
+//   .connect(process.env.MONGO_URL, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log("DB Connection successful");
+//   })
+//   .catch(() => {
+//     console.log("Unable to connect to DB");
+//   });
+const connectDb = async () => {
+  await mongoose
+    .connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(
+      () => {
+        console.info(`Connected to database`);
+      },
+      (error) => {
+        console.error(`Connection error: ${error.stack}`);
+        process.exit(1);
+      }
+    );
+};
+
+connectDb().catch((error) => console.error(error));
 
 //   middleware
 app.use(
